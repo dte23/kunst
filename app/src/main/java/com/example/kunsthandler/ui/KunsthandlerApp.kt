@@ -19,4 +19,4 @@ fun KunsthandlerApp(
         viewModel = viewModel,
         modifier = modifier
     )
-} 
+}

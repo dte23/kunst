@@ -31,7 +31,6 @@ class NavigationTest {
         // Click on first photo
         composeTestRule.onAllNodes(hasClickAction())[0].performClick()
 
-        // Wait for UI to update and verify we're on details screen
         composeTestRule.waitForIdle()
         composeTestRule.onNodeWithText("Velg ramme og størrelse").assertIsDisplayed()
         composeTestRule.onNodeWithTag("frame_type_wood").assertExists()
