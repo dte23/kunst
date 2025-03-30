@@ -1,0 +1,36 @@
+package com.example.kunsthandler.data
+
+import androidx.annotation.DrawableRes
+
+data class Artist(
+    val id: Long,
+    val name: String = "",
+    val familyName: String = ""
+)
+
+enum class Category {
+    NATURE,
+    FOOD,
+    SPORT
+}
+
+data class Photo(
+    val id: Long,
+    val title: String = "",
+    @DrawableRes
+    val imageResId: Int,
+    val artist: Artist,
+    val category: Category,
+    val price: Float = 0.0f
+)
+
+data class SelectedPhoto(
+    val photo: Photo,
+    val frameType: FrameType,
+    val frameWidth: Int,
+    val photoSize: PhotoSize,
+    val photoPrice: Float
+) {
+    val totalPrice: Float
+        get() = photoPrice + frameType.extraPrice + photoSize.extraPrice + (frameWidth * 0.5f)
+} 

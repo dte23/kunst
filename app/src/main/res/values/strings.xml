@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kunsthandler</string>
+    
+    <!-- Common -->
+    <string name="back">Tilbake</string>
+    <string name="home">Hjem</string>
+    <string name="cart_empty">Handlekurven er tom</string>
+    <string name="price_format">%.2f kr</string>
+    
+    <!-- Home Screen -->
+    <string name="select_image_by">Velg bilde basert på</string>
+    <string name="by_artist">Kunstner</string>
+    <string name="by_category">Kategori</string>
+    <string name="cart">Handlekurv</string>
+    <string name="item_count">Antall bilder: %1$d</string>
+    <string name="total_price">Totalpris: %1$.2f kr</string>
+    <string name="to_payment">Til betaling</string>
+    
+    <!-- Select Artist Screen -->
+    <string name="select_artist">Velg kunstner</string>
+    
+    <!-- Select Category Screen -->
+    <string name="select_category">Velg kategori</string>
+    
+    <!-- Images Screen -->
+    <string name="images_by_artist">Bilder av %1$s %2$s</string>
+    <string name="images_by_category">Bilder i kategorien %1$s</string>
+    <string name="all_images">Alle bilder</string>
+    
+    <!-- Details Screen -->
+    <string name="details">Detaljer</string>
+    <string name="select_frame_and_size">Velg ramme og størrelse</string>
+    <string name="frame_type">Rammetype</string>
+    <string name="frame_size">Rammestørrelse</string>
+    <string name="frame_wood">Tre</string>
+    <string name="frame_metal">Metall</string>
+    <string name="frame_plastic">Plast</string>
+    <string name="frame_type_none">Ingen</string>
+    <string name="size_small">Liten</string>
+    <string name="size_medium">Medium</string>
+    <string name="size_large">Stor</string>
+    <string name="select_frame_width">Velg rammebredde</string>
+    <string name="frame_width_mm">%1$dmm</string>
+    <string name="add_to_cart">Legg i handlekurv</string>
+    <string name="continue_shopping">Fortsett å handle</string>
+    <string name="velg_ramme_og_størrelse">Velg ramme og størrelse</string>
+    <string name="velg_rammebredde">Velg rammebredde</string>
+    <string name="legg_i_handlekurv">Legg i handlekurv</string>
+    <string name="hjem">Hjem</string>
+    
+    <!-- Payment Screen -->
+    <string name="payment">Betaling</string>
+    <string name="total_price_label">Totalpris:</string>
+    <string name="pay_button">Betal!</string>
+    <string name="payment_not_implemented">Ikke implementert</string>
+    <string name="remove_from_cart">Fjern fra handlekurven</string>
+</resources>
