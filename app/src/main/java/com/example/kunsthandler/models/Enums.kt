@@ -12,4 +12,10 @@ enum class PhotoSize(val extraPrice: Float, val size: Int = 170) {
     SMALL(0f, size = 170),
     MEDIUM(130f, size = 200),
     LARGE(230f, size = 250)
-} 
+}
+
+enum class Category {
+    NATURE,
+    FOOD,
+    SPORT
+}

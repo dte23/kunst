@@ -8,12 +8,6 @@ data class Artist(
     val familyName: String = ""
 )
 
-enum class Category {
-    NATURE,
-    FOOD,
-    SPORT
-}
-
 data class Photo(
     val id: Long,
     val title: String = "",

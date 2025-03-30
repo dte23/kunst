@@ -26,10 +26,10 @@ import com.example.kunsthandler.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppTopBar(
+    modifier: Modifier = Modifier,
     title: String,
     showBackButton: Boolean = true,
-    onBackClick: () -> Unit = {},
-    modifier: Modifier = Modifier
+    onBackClick: () -> Unit = {}
 ) {
     CenterAlignedTopAppBar(
         title = { Text(title) },
