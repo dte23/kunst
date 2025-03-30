@@ -1,6 +1,6 @@
 package com.example.kunsthandler
 
-import com.example.kunsthandler.data.*
+import com.example.kunsthandler.models.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

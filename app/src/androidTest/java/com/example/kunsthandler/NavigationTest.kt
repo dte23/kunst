@@ -3,11 +3,11 @@ package com.example.kunsthandler
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.kunsthandler.data.Category
+import com.example.kunsthandler.models.Category
 import com.example.kunsthandler.data.ArtDataSource
-import com.example.kunsthandler.data.FrameType
-import com.example.kunsthandler.data.PhotoSize
-import com.example.kunsthandler.data.SelectedPhoto
+import com.example.kunsthandler.models.FrameType
+import com.example.kunsthandler.models.PhotoSize
+import com.example.kunsthandler.models.SelectedPhoto
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test

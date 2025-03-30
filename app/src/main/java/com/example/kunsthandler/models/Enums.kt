@@ -1,4 +1,4 @@
-package com.example.kunsthandler.data
+package com.example.kunsthandler.models
 
 import androidx.compose.ui.graphics.Color
 

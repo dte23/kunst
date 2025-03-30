@@ -22,8 +22,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.kunsthandler.R
-import com.example.kunsthandler.data.*
+import com.example.kunsthandler.data.ArtDataSource
+import com.example.kunsthandler.models.FrameType
+import com.example.kunsthandler.models.Photo
+import com.example.kunsthandler.models.PhotoSize
+import com.example.kunsthandler.models.SelectedPhoto
 import com.example.kunsthandler.ui.viewmodels.KunsthandlerViewModel
+import com.example.kunsthandler.ui.components.AppTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,24 +50,9 @@ fun DetailsScreen(
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(stringResource(R.string.details)) },
-                navigationIcon = {
-                    IconButton(
-                        onClick = onNavigateBack,
-                        modifier = Modifier.testTag("nav_back")
-                    ) {
-                        Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.back),
-                            tint = MaterialTheme.colorScheme.onPrimary
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary
-                )
+            AppTopBar(
+                title = stringResource(R.string.details),
+                onBackClick = onNavigateBack
             )
         },
         modifier = modifier

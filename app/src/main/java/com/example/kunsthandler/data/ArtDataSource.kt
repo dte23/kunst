@@ -1,6 +1,9 @@
 package com.example.kunsthandler.data
 
 import com.example.kunsthandler.R
+import com.example.kunsthandler.models.Artist
+import com.example.kunsthandler.models.Category
+import com.example.kunsthandler.models.Photo
 
 object ArtDataSource {
     val artists = listOf(

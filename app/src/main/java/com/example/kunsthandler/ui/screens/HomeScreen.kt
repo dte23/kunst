@@ -6,39 +6,36 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.kunsthandler.R
-import com.example.kunsthandler.data.SelectedPhoto
+import com.example.kunsthandler.models.SelectedPhoto
 import com.example.kunsthandler.ui.viewmodels.KunsthandlerViewModel
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.ui.platform.testTag
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.kunsthandler.ui.components.AppTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    modifier: Modifier = Modifier,
     onSelectArtist: () -> Unit,
     onSelectCategory: () -> Unit,
     onPayment: () -> Unit,
-    viewModel: KunsthandlerViewModel,
-    modifier: Modifier = Modifier
+    viewModel: KunsthandlerViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(stringResource(R.string.app_name)) },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary
-                )
+            AppTopBar(
+                title = stringResource(R.string.app_name),
+                showBackButton = false
             )
         },
         modifier = modifier

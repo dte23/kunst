@@ -1,7 +1,8 @@
 package com.example.kunsthandler.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.example.kunsthandler.data.*
+import com.example.kunsthandler.models.Photo
+import com.example.kunsthandler.models.SelectedPhoto
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

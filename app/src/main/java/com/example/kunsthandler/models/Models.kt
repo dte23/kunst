@@ -1,4 +1,4 @@
-package com.example.kunsthandler.data
+package com.example.kunsthandler.models
 
 import androidx.annotation.DrawableRes
 
@@ -32,5 +32,5 @@ data class SelectedPhoto(
     val photoPrice: Float
 ) {
     val totalPrice: Float
-        get() = photoPrice + frameType.extraPrice + photoSize.extraPrice + (frameWidth * 0.5f)
+        get() = calculateTotalPrice(this)
 } 

@@ -15,14 +15,15 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.kunsthandler.R
 import com.example.kunsthandler.ui.viewmodels.KunsthandlerViewModel
+import com.example.kunsthandler.ui.components.AppTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PaymentScreen(
+    modifier: Modifier = Modifier,
     onNavigateBack: () -> Unit,
     onNavigateToHome: () -> Unit,
-    viewModel: KunsthandlerViewModel = viewModel(),
-    modifier: Modifier = Modifier
+    viewModel: KunsthandlerViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val selectedPhotos = uiState.selectedPhotos
@@ -35,29 +36,13 @@ fun PaymentScreen(
         (selectedPhoto.frameWidth * 0.5f)).toDouble()
     }
 
-    // Get string resource before using it in onClick
     val notImplementedText = stringResource(R.string.payment_not_implemented)
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(stringResource(R.string.payment)) },
-                navigationIcon = {
-                    IconButton(
-                        onClick = onNavigateBack,
-                        modifier = Modifier.testTag("nav_back")
-                    ) {
-                        Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.back),
-                            tint = MaterialTheme.colorScheme.onPrimary
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary
-                )
+            AppTopBar(
+                title = stringResource(R.string.payment),
+                onBackClick = onNavigateBack
             )
         },
         modifier = modifier

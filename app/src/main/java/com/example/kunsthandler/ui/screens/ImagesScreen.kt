@@ -1,7 +1,6 @@
 package com.example.kunsthandler.ui.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -20,21 +19,22 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.kunsthandler.R
 import com.example.kunsthandler.data.ArtDataSource
-import com.example.kunsthandler.data.Artist
-import com.example.kunsthandler.data.Category
-import com.example.kunsthandler.data.Photo
+import com.example.kunsthandler.models.Artist
+import com.example.kunsthandler.models.Category
+import com.example.kunsthandler.models.Photo
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.kunsthandler.ui.viewmodels.KunsthandlerViewModel
+import com.example.kunsthandler.ui.components.AppTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ImagesScreen(
-    onNavigateToDetails: (Photo) -> Unit,
-    onNavigateBack: () -> Unit,
+    modifier: Modifier = Modifier,
     selectedArtist: Artist? = null,
     selectedCategory: Category? = null,
-    viewModel: KunsthandlerViewModel = viewModel(),
-    modifier: Modifier = Modifier
+    onNavigateBack: () -> Unit,
+    onNavigateToDetails: (Photo) -> Unit,
+    viewModel: KunsthandlerViewModel = viewModel()
 ) {
     val filteredPhotos = when {
         selectedArtist != null -> ArtDataSource.photosByArtist(selectedArtist)
@@ -57,24 +57,9 @@ fun ImagesScreen(
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(title) },
-                navigationIcon = {
-                    IconButton(
-                        onClick = onNavigateBack,
-                        modifier = Modifier.testTag("nav_back")
-                    ) {
-                        Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.back),
-                            tint = MaterialTheme.colorScheme.onPrimary
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary
-                )
+            AppTopBar(
+                title = title,
+                onBackClick = onNavigateBack
             )
         },
         modifier = modifier

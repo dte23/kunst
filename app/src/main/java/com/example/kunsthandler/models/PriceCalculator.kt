@@ -1,4 +1,6 @@
-package com.example.kunsthandler.data
+package com.example.kunsthandler.models
+
+import com.example.kunsthandler.models.SelectedPhoto
 
 fun calculateTotalPrice(selectedPhoto: SelectedPhoto): Float {
     val basePrice = selectedPhoto.photoPrice
