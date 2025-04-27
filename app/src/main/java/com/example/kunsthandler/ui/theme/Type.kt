@@ -1,6 +1,11 @@
 package com.example.kunsthandler.ui.theme
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.font.FontFamily
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> b44f6eeec25abf0f0161eeaa9307366a0d0c84df
 import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.text.googlefonts.Font
 import com.example.kunsthandler.R

@@ -7,7 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.kunsthandler.data.ArtDataSource
+
 import com.example.kunsthandler.models.Category
 import com.example.kunsthandler.ui.screens.*
 import com.example.kunsthandler.ui.viewmodels.KunsthandlerViewModel
