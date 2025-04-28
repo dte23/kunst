@@ -14,8 +14,3 @@ enum class PhotoSize(val extraPrice: Float, val size: Int = 170) {
     LARGE(230f, size = 250)
 }
 
-enum class Category {
-    NATURE,
-    FOOD,
-    SPORT
-}

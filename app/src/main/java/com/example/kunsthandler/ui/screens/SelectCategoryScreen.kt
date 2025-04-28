@@ -17,7 +17,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.kunsthandler.R
 import com.example.kunsthandler.models.Category
-import com.example.kunsthandler.data.ArtDataSource
 import com.example.kunsthandler.ui.components.AppTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -25,7 +24,8 @@ import com.example.kunsthandler.ui.components.AppTopBar
 fun SelectCategoryScreen(
     modifier: Modifier = Modifier,
     onNavigateBack: () -> Unit,
-    onNavigateToImages: (Category) -> Unit
+    onNavigateToImages: (Category) -> Unit,
+    categories: List<Category>
 ) {
     Scaffold(
         topBar = {
@@ -37,7 +37,7 @@ fun SelectCategoryScreen(
         modifier = modifier
     ) { innerPadding ->
         CategoryGrid(
-            categories = Category.entries,
+            categories = categories,
             onCategorySelected = onNavigateToImages,
             modifier = Modifier.padding(innerPadding)
         )
@@ -92,4 +92,4 @@ private fun CategoryCard(
             )
         }
     }
-} 
+}

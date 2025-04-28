@@ -23,6 +23,10 @@ uiTestJunit4 = "1.7.8"
 uiTextGoogleFonts = "1.7.8"
 supportAnnotations = "28.0.0"
 junit = "4.12"
+roomRuntimeAndroid = "2.7.1"
+roomRuntimeJvm = "2.7.1"
+firebaseAppdistributionGradle = "5.1.1"
+litertSupportApi = "1.2.0"
 
 [libraries]
 androidx-core = { module = "androidx.test:core", version.ref = "core" }
@@ -59,6 +63,10 @@ robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectr
 ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "uiTestJunit4" }
 support-annotations = { group = "com.android.support", name = "support-annotations", version.ref = "supportAnnotations" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-room-runtime-android = { group = "androidx.room", name = "room-runtime-android", version.ref = "roomRuntimeAndroid" }
+androidx-room-runtime-jvm = { group = "androidx.room", name = "room-runtime-jvm", version.ref = "roomRuntimeJvm" }
+firebase-appdistribution-gradle = { group = "com.google.firebase", name = "firebase-appdistribution-gradle", version.ref = "firebaseAppdistributionGradle" }
+litert-support-api = { group = "com.google.ai.edge.litert", name = "litert-support-api", version.ref = "litertSupportApi" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -16,8 +16,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.testTag
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.kunsthandler.models.Artist
+import com.example.kunsthandler.models.Category
 import com.example.kunsthandler.ui.components.AppTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -94,7 +97,8 @@ fun HomeScreen(
                     items(uiState.selectedPhotos) { selectedPhoto ->
                         CartItem(
                             selectedPhoto = selectedPhoto,
-                            onRemove = { viewModel.removeFromCart(selectedPhoto) }
+                            onRemove = { viewModel.removeFromCart(selectedPhoto) },
+                            viewModel
                         )
                     }
                 }
@@ -150,8 +154,15 @@ fun HomeScreen(
 private fun CartItem(
     selectedPhoto: SelectedPhoto,
     onRemove: () -> Unit,
+    viewModel: KunsthandlerViewModel,
     modifier: Modifier = Modifier
 ) {
+//    val categories by viewModel.categories.observeAsState(initial = emptyList())
+//    val artists by viewModel.artists.observeAsState(initial = emptyList())
+
+    val categories = emptyList<Category>()
+    val artists = emptyList<Artist>()
+
     Surface(
         modifier = modifier.fillMaxWidth(),
         color = MaterialTheme.colorScheme.surfaceContainerLow,
@@ -169,11 +180,11 @@ private fun CartItem(
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Text(
-                    text = selectedPhoto.photo.category.name,
+                    text = categories.find { it.id == selectedPhoto.photo.categoryId }?.name ?: "",
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Text(
-                    text = "${selectedPhoto.photo.artist.name}",
+                    text = artists.find { it.id == selectedPhoto.photo.artistId }?.name ?: "",
                     style = MaterialTheme.typography.bodyMedium
                 )
             }

@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.kunsthandler"
-        minSdk = 26
+        minSdk = 33
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -49,6 +49,11 @@ android {
             isReturnDefaultValues = true
         }
     }
+    packaging {
+        resources {
+            pickFirsts += "META-INF/**"
+        }
+    }
 }
 
 dependencies {
@@ -58,11 +63,16 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.8.2")
     
     // Compose dependencies
-    implementation("androidx.compose.ui:ui:1.5.4")
-    implementation("androidx.compose.ui:ui-graphics:1.5.4")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.5.4")
-    implementation("androidx.compose.material3:material3:1.2.0")
-    
+    implementation("androidx.compose.ui:ui:1.8.0")
+    implementation("androidx.compose.ui:ui-graphics:1.8.0")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.8.0")
+    implementation("androidx.compose.material3:material3:1.3.2")
+    implementation("androidx.compose.runtime:runtime-livedata:1.8.0")
+    implementation(libs.androidx.room.runtime.android)
+//    implementation(libs.androidx.room.runtime.jvm)
+    implementation(libs.firebase.appdistribution.gradle)
+    implementation(libs.litert.support.api)
+
     // Testing dependencies
     testImplementation("junit:junit:4.13.2")
     testImplementation("androidx.test:core:1.5.0")
@@ -71,7 +81,7 @@ dependencies {
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
     testImplementation("org.robolectric:robolectric:4.11.1")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
-    
+
     // Android Testing dependencies
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test:core-ktx:1.5.0")
@@ -87,6 +97,15 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling:1.5.4")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.4")
 
+    // Retrofit dependencies
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+
+    // JSON parsing via Gson
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // (Optional) OkHttp logging interceptor
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+
     // Keep your existing navigation, coil, and other dependencies
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.navigation.fragment)
@@ -96,4 +115,7 @@ dependencies {
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.kotlinx.serialization.json)
+
+    // Mr Jake makes an appearance
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
 }

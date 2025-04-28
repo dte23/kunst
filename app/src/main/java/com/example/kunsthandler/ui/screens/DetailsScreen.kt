@@ -9,6 +9,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,8 +19,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
 import com.example.kunsthandler.R
+import com.example.kunsthandler.models.Category
 import com.example.kunsthandler.models.FrameType
 import com.example.kunsthandler.models.Photo
 import com.example.kunsthandler.models.PhotoSize
@@ -62,6 +66,9 @@ fun DetailsScreen(
                 .padding(horizontal = 16.dp, vertical = 4.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+//            val categories by viewModel.categories.observeAsState(initial = emptyList())
+            val categories = emptyList<Category>()
+
             photo?.let { currentPhoto ->
                 // Photo with Card background
                 Surface(
@@ -77,20 +84,18 @@ fun DetailsScreen(
                     ) {
                         // Category name text
                         Text(
-                            text = currentPhoto.category.name,
+                            text = categories.find { it.id == currentPhoto.categoryId }?.name ?: "",
                             style = MaterialTheme.typography.titleLarge,
                             modifier = Modifier.padding(bottom = 4.dp),
                             textAlign = TextAlign.Center
                         )
-                        
-                        // Simple frame approach with fixed width
+
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(4.dp),
                             contentAlignment = Alignment.Center
                         ) {
-                            // Image with frame with fixed width
                             Box(
                                 modifier = Modifier
                                     .width(280.dp) // Fixed width approach
@@ -102,22 +107,27 @@ fun DetailsScreen(
                                         shape = MaterialTheme.shapes.small
                                     ),
                                 contentAlignment = Alignment.Center
-                            ) {
-                                // Image with fixed width but preserving aspect ratio
-                                Image(
-                                    painter = painterResource(id = currentPhoto.imageResId),
-                                    contentDescription = null,
-                                    contentScale = ContentScale.FillWidth, // Fill width completely
+                            )
+                            {
+//                                Text(
+//                                    text = photo.imageUrl,
+//                                    fontSize = 4.sp,                       // debug shiz
+//                                    modifier = Modifier.padding(14.dp)
+//                                )
+
+                                AsyncImage(
+                                    model = photo.imageUrl,
+                                    contentDescription = photo.title,
+                                    contentScale = ContentScale.Crop,
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .padding(frameWidth.dp)
+                                        .aspectRatio(1f)
                                 )
                             }
                         }
                     }
                 }
 
-                // Section title - directly go to frame selection
                 Text(
                     text = stringResource(R.string.velg_ramme_og_størrelse),
                     style = MaterialTheme.typography.titleMedium,
@@ -127,7 +137,6 @@ fun DetailsScreen(
                         .padding(bottom = 8.dp, top = 12.dp)
                 )
 
-                // Two columns layout with frame type and size
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -237,7 +246,7 @@ fun DetailsScreen(
                     }
                 }
 
-                // Buttons - no extra spacer needed
+                // Buttons
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()

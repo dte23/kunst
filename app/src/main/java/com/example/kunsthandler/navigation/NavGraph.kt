@@ -7,8 +7,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 
-import com.example.kunsthandler.models.Category
 import com.example.kunsthandler.ui.screens.*
 import com.example.kunsthandler.ui.viewmodels.KunsthandlerViewModel
 
@@ -20,7 +21,7 @@ sealed class Screen(val route: String) {
         fun createRoute(type: String, id: String) = "images/$type/$id"
     }
     object Details : Screen("details/{photoId}") {
-        fun createRoute(photoId: Long) = "details/$photoId"
+        fun createRoute(photoId: String) = "details/$photoId"
     }
     object Payment : Screen("payment")
 }
@@ -31,6 +32,9 @@ fun NavGraph(
     viewModel: KunsthandlerViewModel,
     modifier: Modifier = Modifier
 ) {
+    val artists by viewModel.artists.observeAsState(initial = emptyList())
+    val categories by viewModel.categories.observeAsState(initial = emptyList())
+
     NavHost(
         navController = navController,
         startDestination = Screen.Home.route,
@@ -38,84 +42,74 @@ fun NavGraph(
     ) {
         composable(Screen.Home.route) {
             HomeScreen(
-                onSelectArtist = { navController.navigate(Screen.SelectArtist.route) },
-                onSelectCategory = { navController.navigate(Screen.SelectCategory.route) },
-                onPayment = { navController.navigate(Screen.Payment.route) },
-                viewModel = viewModel
+                viewModel = viewModel,
+                onSelectArtist    = { navController.navigate(Screen.SelectArtist.route) },
+                onSelectCategory  = { navController.navigate(Screen.SelectCategory.route) },
+                onPayment         = { navController.navigate(Screen.Payment.route) }
             )
         }
-        
+
         composable(Screen.SelectArtist.route) {
             SelectArtistScreen(
+                artists = artists,
                 onNavigateToImages = { artist ->
-                    navController.navigate(Screen.Images.createRoute("artist", artist.id.toString()))
+                    navController.navigate(Screen.Images.createRoute("artist", artist.id))
                 },
                 onNavigateBack = { navController.navigateUp() }
             )
         }
-        
+
         composable(Screen.SelectCategory.route) {
             SelectCategoryScreen(
+                categories = categories,
                 onNavigateToImages = { category ->
-                    navController.navigate(Screen.Images.createRoute("category", category.name))
+                    navController.navigate(Screen.Images.createRoute("category", category.id))
                 },
                 onNavigateBack = { navController.navigateUp() }
             )
         }
-        
+
         composable(
             route = Screen.Images.route,
             arguments = listOf(
                 navArgument("type") { type = NavType.StringType },
-                navArgument("id") { type = NavType.StringType }
+                navArgument("id")   { type = NavType.StringType }
             )
         ) { backStackEntry ->
-            val type = backStackEntry.arguments?.getString("type")
-            val id = backStackEntry.arguments?.getString("id")
-            
+            val type = backStackEntry.arguments?.getString("type") ?: ""
+            val id   = backStackEntry.arguments?.getString("id")   ?: ""
+
             val selectedArtist = if (type == "artist") {
-                ArtDataSource.artists.find { artist -> artist.id.toString() == id }
+                artists.firstOrNull { it.id == id }
             } else null
-            
+
             val selectedCategory = if (type == "category") {
-                Category.entries.find { it.name == id }
+                categories.firstOrNull { it.id == id }
             } else null
-            
+
             ImagesScreen(
-                onNavigateToDetails = { photo -> 
+                viewModel           = viewModel,
+                selectedArtist      = selectedArtist,
+                selectedCategory    = selectedCategory,
+                onNavigateBack      = { navController.navigateUp() },
+                onNavigateToDetails = { photo ->
                     navController.navigate(Screen.Details.createRoute(photo.id))
-                },
-                onNavigateBack = { navController.navigateUp() },
-                selectedArtist = selectedArtist,
-                selectedCategory = selectedCategory,
-                viewModel = viewModel
+                }
             )
         }
-        
+
         composable(
             route = Screen.Details.route,
             arguments = listOf(
-                navArgument("photoId") { type = NavType.LongType }
+                navArgument("photoId") { type = NavType.StringType }
             )
         ) { backStackEntry ->
-            val photoId = backStackEntry.arguments?.getLong("photoId")
-            val photo = photoId?.let { ArtDataSource.photoById(it) }
-            
+            val photoId = backStackEntry.arguments?.getString("photoId") ?: ""
+            val photo   = viewModel.photos.value?.firstOrNull { it.id == photoId }
+
             DetailsScreen(
-                photo = photo,
-                onNavigateBack = { navController.navigateUp() },
-                onNavigateToHome = {
-                    navController.navigate(Screen.Home.route) {
-                        popUpTo(Screen.Home.route)
-                    }
-                },
-                viewModel = viewModel
-            )
-        }
-        
-        composable(Screen.Payment.route) {
-            PaymentScreen(
-                onNavigateBack = { navController.navigateUp() },
+                photo            = photo,
+                onNavigateBack   = { navController.navigateUp() },
                 onNavigateToHome = {
                     navController.navigate(Screen.Home.route) {
                         popUpTo(Screen.Home.route)
@@ -125,5 +119,20 @@ fun NavGraph(
                 viewModel = viewModel
             )
         }
+
+        composable(Screen.Payment.route) {
+            PaymentScreen(
+                viewModel         = viewModel,
+                onNavigateBack    = { navController.navigateUp() },
+                onNavigateToHome  = {
+                    navController.navigate(Screen.Home.route) {
+                        popUpTo(Screen.Home.route)
+                        launchSingleTop = true
+                    }
+                }
+            )
+        }
     }
 }
+
+

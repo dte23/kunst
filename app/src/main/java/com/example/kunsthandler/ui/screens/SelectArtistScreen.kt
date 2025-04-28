@@ -16,7 +16,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.kunsthandler.R
-import com.example.kunsthandler.data.ArtDataSource
 import com.example.kunsthandler.models.Artist
 import com.example.kunsthandler.ui.components.AppTopBar
 
@@ -25,7 +24,9 @@ import com.example.kunsthandler.ui.components.AppTopBar
 fun SelectArtistScreen(
     modifier: Modifier = Modifier,
     onNavigateBack: () -> Unit,
-    onNavigateToImages: (Artist) -> Unit
+    onNavigateToImages: (Artist) -> Unit,
+    artists: List<Artist>
+
 ) {
     Scaffold(
         topBar = {
@@ -37,7 +38,7 @@ fun SelectArtistScreen(
         modifier = modifier
     ) { innerPadding ->
         ArtistGrid(
-            artists = ArtDataSource.artists,
+            artists = artists,
             onArtistSelected = onNavigateToImages,
             modifier = Modifier.padding(innerPadding)
         )
