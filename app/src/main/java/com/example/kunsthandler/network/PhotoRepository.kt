@@ -1,6 +1,9 @@
 // Rename to PhotosRepositoryImpl or NetworkPhotosRepository.kt
 package com.example.kunsthandler.network
 
+// Remove incorrect import
+// import com.google.firebase.appdistribution.gradle.ApiService
+
 class NetworkPhotosRepository(
     private val apiService: ApiService
 ) {

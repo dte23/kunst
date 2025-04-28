@@ -7,6 +7,7 @@
     <string name="home">Hjem</string>
     <string name="cart_empty">Handlekurven er tom</string>
     <string name="price_format">%.2f kr</string>
+    <string name="no_images">Ingen bilder funnet</string>
     
     <!-- Home Screen -->
     <string name="select_image_by">Velg bilde basert på</string>
